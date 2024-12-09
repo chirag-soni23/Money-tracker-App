@@ -54,13 +54,16 @@ export const ExpenseProvider = ({ children }) => {
 
     // Edit transaction
     const editTransaction = async (id, updateTransaction) => {
+        setLoading(true);
         try {
             const { data } = await axios.put(`/api/expense/update/${id}`, updateTransaction);
             toast.success(data.message);
             fetchTransactions();
+            setLoading(false);
         } catch (error) {
             console.log(`Error editing transaction: ${error.message}`);
             toast.error(error.response?.data?.message || 'Error editing transaction');
+            setLoading(false);
         }
     };
 
