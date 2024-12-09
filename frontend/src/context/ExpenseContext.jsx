@@ -42,13 +42,15 @@ export const ExpenseProvider = ({ children }) => {
 
     // Delete transaction
     const deleteTransaction = async (id) => {
-        try {
-            const { data } = await axios.delete(`/api/expense/delete/${id}`);
-            toast.success(data.message);
-            fetchTransactions();
-        } catch (error) {
-            console.log(`Error deleting transaction: ${error.message}`);
-            toast.error(error.response?.data?.message || 'Error deleting transaction');
+        if(confirm("Are you sure to delete ?")){
+            try {
+                const { data } = await axios.delete(`/api/expense/delete/${id}`);
+                toast.success(data.message);
+                fetchTransactions();
+            } catch (error) {
+                console.log(`Error deleting transaction: ${error.message}`);
+                toast.error(error.response?.data?.message || 'Error deleting transaction');
+            }
         }
     };
 
