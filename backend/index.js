@@ -18,6 +18,9 @@ mongoose.connect("mongodb://localhost:27017/money-tracker",{
 
 // routes
 app.use('/api/expense',expenseRoute);
+app.get('/',(req,res)=>{
+    res.send("Hello");
+})
 
 
 // start the server
